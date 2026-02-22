@@ -1,0 +1,148 @@
+body{
+    background-color: rgb(23, 23, 23);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: white;
+  
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem;
+    align-items: center;
+}
+.container{
+    /* background-color: rgb(44, 45, 46); */
+    display: flex;
+    justify-content :left;
+    /* padding: 2rem; */
+    border-radius: 1rem;
+    margin-top: 1rem;
+    margin-left: 5rem;
+}
+#logout-btn{
+    height: 3.8rem;
+    width: 8rem;
+    text-align: center;
+    font-size: 1.3rem;
+    /* transform: translateX(110rem); */
+    background-color: white;
+    border: none;
+    /* margin-top: 1rem; */
+    border-radius: 0.3rem;
+    margin-right: 10rem;
+
+}
+.container button{
+    height: 9rem;
+    width: 15rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 1rem;
+    background-color: white;
+    border: none;
+    font-weight: 500;
+   background-color:   rgb(66, 71, 75);
+   color: white;
+   border-radius: 0.5rem;
+
+}
+.container #add-btn{
+    background-color: rgb(92, 171, 92);
+}
+.container #remove-btn{
+    background-color: rgb(185, 63, 63);
+}
+.container #show-btn{
+    background-color: rgb(64, 123, 152);
+}
+.container button:hover{
+    transition: ease-in 0.3s;
+    cursor: pointer;
+    transform: scale(1.1);
+}
+#logout-btn:hover{
+    transition: 0.4s;
+    cursor: pointer;
+    background: grey;
+    color: white;
+
+}
+.container #add-btn:hover{
+    box-shadow: rgba(0, 255, 115, 0.55) 0px 5px 15px;
+}
+.container #remove-btn:hover{
+    box-shadow: rgba(186, 25, 25, 0.729) 0px 5px 15px;
+}
+.container #show-btn:hover{
+    box-shadow: rgba(0, 180, 246, 0.55) 0px 5px 15px;
+}
+#welcome{
+    color: white;
+    font-size: 3rem;
+    margin-left: 5rem;
+}
+
+.popup-window{
+ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    bottom: 50%;
+    left: 50%;
+    right: 50%;
+    display: none;
+}
+
+.popup-window form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(32, 31, 31);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: rgb(255, 255, 255) 0px 5px 15px;
+
+}
+.popup-window form input{
+    width: 17rem;
+    margin-bottom: 2rem;
+    height: 0.4rem;
+    padding: 1rem;
+    border: none;
+}
+.popup-window form button{
+    height: 2.3rem;
+    width: 5rem;
+    font-size: 1.1rem;
+    border: none;
+}
+
+span{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    width: 100%;
+}
+a{
+    text-align: right;
+    color: white;
+    margin-bottom: 1.1rem;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 900;
+}
+.remove-btn-window{
+    background-color: black;
+    position: absolute;
+    top: 20%;
+    bottom: 90%;
+    left: 20%;
+    /* right: 50%; */
+    display: none;
+;
+}

@@ -1,0 +1,9 @@
+[
+  {
+    "id": 1,
+    "name": "Jacket",
+    "description": "A Warm Leather Jacket for Winter.",
+    "price": "323",
+    "img": "/Assests/jacket.jpeg"
+  }
+]

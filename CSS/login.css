@@ -1,0 +1,104 @@
+body{
+    background-color: rgb(30, 29, 29);
+    font-family: 'poppins';
+    color: white;
+    box-sizing: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.container{
+    height: 28rem;
+    width: 25rem;
+    background-color: rgb(28, 28, 28);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: rgb(255, 255, 255) 0px 5px 15px;
+}
+.container form{
+    display: flex;
+    flex-direction: column;
+}
+.container input{
+    /* margin-bottom: 1rem; */
+    height: 2rem;
+    width: 18rem;
+    background-color: rgb(49, 44, 44);
+    border: none;
+    color: white;
+    padding: 5px;
+    outline: none;
+}
+
+form p{
+    color: rgb(190, 28, 28);
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+.container button{
+    width: 28%;
+    height: 45px;
+    font-size: 1.1rem;
+    font-weight: 550;
+    border: none;
+    background-color: rgb(44, 45, 46);
+    color: white;
+    box-shadow: rgba(0, 0, 0, 0.85) 0px 5px 15px;
+    /* margin-top: 0.5rem; */
+
+}
+.container button:hover{
+    background-color: white;
+    color: black;
+    transition: 1s;
+    cursor: pointer;
+}
+
+form #error{
+    color: #cd1b1b;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    /* margin-bottom: 1rem; */
+}
+.empty{
+    border: 1px solid rgb(235, 47, 47);
+}
+.bi{
+ width: min-content;
+ height: min-content;
+ position: relative;
+ left: 17rem;
+ bottom: 1.9rem;
+ color: rgba(250, 250, 250, 0.29);
+ transition: ease-in 0.2s;
+
+}
+.bi:hover{
+    cursor: pointer;
+    color: white;
+}
+h2{
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+#forget-password{
+    color: rgb(138, 136, 136);
+    text-decoration: none;
+    margin-top: 1.4rem;
+    padding-bottom: 1rem;
+}
+#forget-password:hover{
+    color: white;
+    transform: scale(1.02);
+    transition: ease .4s ;
+}
