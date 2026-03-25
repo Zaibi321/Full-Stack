@@ -1,12 +1,16 @@
 import express from'express';
-import fs from "fs"
-const Data = JSON.parse(fs.readFileSync("/home/shahzaib/Downloads/Project/Data/Data2.json", "utf-8"));
+import Databse from "../Database.js"
 
 const router = express.Router();
 router.use(express.json())
-router.post("/",(req, res) => {
-    const {ID1} = req.body;
-    res.json(Data[ID1])
+router.post("/",async (req, res) => {
+    const {ID} = req.body;
+    try{
+        const result = await Databse.query(`SELECT * FROM products WHERE productid = ${ID}`);
+        res.json(result.rows);
+    }catch(error){
+     console.log("error fetching product",error);
+    }
 })
 
 

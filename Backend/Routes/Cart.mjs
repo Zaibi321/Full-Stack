@@ -1,26 +1,32 @@
+import Database from '../Database.js';
 import express from 'express';
-import fs from "fs"
 const router = express.Router();
+
 router.use(express.json());
 
 
-function addtoCart(productid){
-    const data = fs.readFileSync("/home/shahzaib/Downloads/Project/Data/Cart_Data.mjs","utf-8");
-    const cart = JSON.parse(data);
-
-    cart.push({
-        id : productid
-    })
-     fs.writeFileSync("/home/shahzaib/Downloads/Project/Data/Cart_Data.mjs", JSON.stringify(cart, null, 2));
-
+async function addtoCart(productid){
+   
+     const results = await Database.query(`INSERT INTO Cart (ProductID) VALUES (${productid}) returning *`);
+     if(results.rowCount > 0){
+        return true;
+     }
+     else{
+        return false;
+     }
+     
 }
 
 router.post("/", (req, res) =>  {
     const {product_id} = req.body;
-    console.log(product_id);
     if(product_id){
-        addtoCart(product_id)
+       const status= addtoCart(product_id);
+       if(status){
         res.json({success : true})
+       }
+       else{
+        res.json({success : false})
+       }
     }
     else{
         res.json({success : false})

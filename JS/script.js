@@ -11,20 +11,20 @@ let ok = document.querySelector(".ok");
 let filter = document.getElementById("filter-button");
 let minPrice = document.getElementById("min-price-filter");
 let maxPrice = document.getElementById("max-price-filter");
+const apiURl = "http://localhost:3000";
 
 
 
-fetch("http://localhost:3000/data").then(response => response.json()).then(data =>{
-      
-handleIncoming(data);
+const getdata = async () =>
+   {
+     let data = await fetch(`${apiURl}/data`).then(response => response.json());
+     handleIncoming(data);
+  }
+        getdata();
 
-    
-}) 
-
-
-login.addEventListener('click', ()=>{
-    window.location.href = "/Pages/Login.html"
-})
+    login.addEventListener('click', ()=>{
+    window.location.href = "/Pages/Login.html";
+ })
 
  
 const handleIncoming = (data) => {
@@ -37,8 +37,8 @@ const handleIncoming = (data) => {
         product_div.classList.add("card");
 
      product_div.innerHTML = `
-            <img src="${product.img}" class="pic">
-            <p class="product-name">${product.name}</p>
+            <img src="${product.image_url}" class="pic">
+            <p class="product-name">${product.productname}</p>
             <p class="product-price">$${product.price}</p>
             <button class="cart-button">Add to Cart</button>
         `;
@@ -46,10 +46,11 @@ const handleIncoming = (data) => {
         product_div.addEventListener("click", (e) => {
              if (e.target.classList.contains("cart-button")) {
                 e.preventDefault();
-                   AddtoCart(product.id);
+                   AddtoCart(product.productid);
                    return;
-  }
-            window.location.href = `/Pages/first.html?id=${product.id}`;
+          }
+          
+            window.location.href = `/Pages/first.html?id=${product.productid}`;
         });
 
         container.appendChild(product_div)
@@ -60,36 +61,52 @@ const handleIncoming = (data) => {
 }
 
 
- const AddtoCart = (id) => {
-    console.log(id);
-    fetch('http://localhost:3000/cart', {
-        method : "Post",
-        headers : {
-            "Content-Type" : "application/json"
-        },
-        body : JSON.stringify({
-            product_id : id
-        })
-    })
- }
+ const AddtoCart = async (id) => {
+    try{
+
+        let response = await fetch(`${apiURl}/cart`,{
+            method : "Post",
+            headers : {
+                "Content-Type" : "application/json"
+            },
+            body : JSON.stringify({
+                product_id : id
+            })
+
+        });      
+    
+   } catch(error)
+      {
+    console.log("error adding to cart",error);
+   }
+}
 
 
- const HandleSearch = (search_value) => {
-    fetch(`http://localhost:3000/Search?q=${search_value}`, {
+ const HandleSearch = async (search_value) => {
+
+    try{
+       let response = await fetch(`${apiURl}/Search?q=${search_value}`, {
         method : "Post",
         headers : {
             "Content-Type" :"application/json"
-        },
-    }).then( res => res.json()).then(data => {
-    
-        if(!data.success){
-            container.innerHTML =`<p id="no-result">No Search Result</p>`
         }
-        else{
-            handleIncoming(data.products);
-        }
-        
-    })
+   });
+
+    let data = await response.json();
+    console.log(data);
+    if(data.length > 0){
+        handleIncoming(data);
+    }
+    else{
+        container.innerHTML =`<p id="no-result">No Search Result</p>`
+
+    }
+         
+    } catch(error) 
+    {
+        console.log(error);
+    }
+
  }
 
 
@@ -124,8 +141,10 @@ function HandleFilterInput(event){
     }
    
 }
-function SendFilterRequest(min,max){
-    fetch("http://localhost:3000/filter", {
+const  SendFilterRequest = async(min,max) => { 
+
+    try{
+    let response = await fetch("http://localhost:3000/filter", {
         method : "Post",
         headers : {
             "Content-Type" : "application/json"
@@ -134,9 +153,15 @@ function SendFilterRequest(min,max){
             min : min,
             max : max
         })
-    }).then(res => res.json()).then(data => {
-        handleIncoming(data);
+
     });
+
+    let data = await response.json();
+    handleIncoming(data);
+   }   catch(error)
+{
+    console.log(error);
+}
 }
 minPrice.addEventListener("keydown",HandleFilterInput);
 maxPrice.addEventListener("keydown",HandleFilterInput);

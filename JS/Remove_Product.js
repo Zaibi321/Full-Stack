@@ -1,27 +1,34 @@
 const container = document.querySelector(".Cart-products");
 
-fetch("http://localhost:3000/data").then(res => res.json()).then(data =>{
-    const Data = Object.values(data);
-    Data.forEach((element,index) => {
+
+async function ShowProducts(){
+
+let response = await fetch("http://localhost:3000/data");
+let data = await response.json();
+    const DataInObject = Object.values(data);
+    DataInObject.forEach((element,index) => {
          const product_div = document.createElement("div");
          product_div.classList.add("product");
-         product_div.innerHTML = `<img src="${element.img}">
-                                 <p>${element.name}</p>
+         product_div.innerHTML = `<img src="${element.image_url}">
+                                 <p>${element.productname}</p>
                                  <p>$${element.price}</p>
                                  <button class="remove-btn">Remove</button>`;
                                  container.append(product_div) 
 
                   product_div.addEventListener('click',(e)=>{
                     if(e.target.classList.contains("remove-btn")){
-                          RemoveProduct(index);
+                          RemoveProduct(element.productid);
                     }
                   })               
-    })
     
 })
 
-function RemoveProduct(id){
-    fetch("http://localhost:3000/RemoveProduct",{
+}
+
+
+ShowProducts()
+async function RemoveProduct(id){
+    const repsonse = await fetch("http://localhost:3000/RemoveProduct",{
         method :"Post",
         headers : {
             "Content-Type" : "application/json"

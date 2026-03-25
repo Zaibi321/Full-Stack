@@ -1,29 +1,20 @@
 import express from 'express'
-import fs from "fs"
-
+import Database from '../Database.js';
 const router = express.Router();
 router.use(express.json());
 
-function HandleSearch(parameter){
-const Data = JSON.parse(fs.readFileSync("/home/shahzaib/Downloads/Project/Data/Data2.json", "utf-8"));
-  const results = Data.filter(p =>
-    p.name.toLowerCase().includes(parameter))
-    return results;
+async function HandleSearch(parameter){
+    const data = await Database.query(`select * from products where lower(productname) like '%${parameter}%'`);
+    if(data){
+        return data.rows;
+    }
 
 }
-router.post("/", (req,res) => {
+router.post("/", async (req,res) => {
     const q = req.query.q?.toLowerCase() || "";
-    const Loaded = HandleSearch(q);
-    if(Loaded.length === 0){
-        res.json({success : false})
-
-    }
-    else{
-         res.json({success : true,
-                   products : Loaded
-          }); 
-
-    }
+    const Loaded = await HandleSearch(q);
+    res.json(Loaded)
+ 
 })
 
 export default router;

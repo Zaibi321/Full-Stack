@@ -4,7 +4,8 @@ let name = document.getElementById("user");
 let pass = document.getElementById("pass");
 const msg = document.createElement("p");
 let show = document.querySelector(".bi-eye-fill");
-msg.id = "error"
+msg.id = "error";
+let api = `http://localhost:3000`;
 
 
 const ToggleShowPassword = ()=>{
@@ -19,7 +20,6 @@ const ToggleShowPassword = ()=>{
 }
 
 const HandleRedirect = (data) => {
-  console.log(data)
 if(data.success){
     window.location.replace("/Pages/Admin.html")
   }
@@ -36,8 +36,8 @@ const HandleInput =() => {
     if(!username && !password){
       
           msg.innerText = "Username and Password are Empty."
-         form.appendChild(msg)   
-       
+          form.appendChild(msg)   
+          return;
     }
    else if(!password){
       
@@ -55,15 +55,15 @@ const HandleInput =() => {
 }
 
 
-const HandleLogin =()=>{
+const HandleLogin = async()=>{
 
   let check = HandleInput();
   if(!check){
     return;
   }
     else{
-
-    fetch('http://localhost:3000/check',{
+   try{
+    let response = await fetch(`${api}/check`,{
     method: "POST",
     credentials:"include",
     headers: {
@@ -75,13 +75,19 @@ const HandleLogin =()=>{
     pass : check.password
    })
 
-}).then(res => res.json())
-  .then(data =>{
-  
-  HandleRedirect(data);
-    });
+});
+
+
+const data = await response.json();
+HandleRedirect(data);
+   }catch(error){
+    console.log('Network Error',error)
+   }
 
 }
+
+
+
 }
 
 

@@ -1,13 +1,16 @@
 import express from 'express'
-import fs from "fs";
-import path from "path";
 const router = express.Router();
+import Databse from "../Database.js"
 
 
 router.use(express.json())
-router.get("/", (req, res) => {  const products = JSON.parse(fs.readFileSync("/home/shahzaib/Downloads/Project/Data/Data2.json", "utf-8"));
-  console.log(products.length);
-  res.json(products);
+router.get("/", async (req, res) => {
+  try{
+    const result = await Databse.query("SELECT * FROM products");
+    res.json(result.rows);
+  }catch(err){
+    res.status(500).json({ error: "Database query error" });
+  }
 })
   
 export default router;

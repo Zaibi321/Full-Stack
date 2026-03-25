@@ -4,6 +4,31 @@
     "name": "Jacket",
     "description": "A Warm Leather Jacket for Winter.",
     "price": "323",
-    "img": "/Assests/jacket.jpeg"
+    "img": "/Assets/jacket.png"
+  },
+  {
+    "id" : 2,
+    "name":"Cap",
+    "description" : "A black Cap",
+    "price" : 200,
+    "img" :"/Assets/cap.jpg"
+  },{
+    "id" : 3,
+    "name" : "Jeans",
+    "description" :  "Blue Denim Jeans",
+    "price" : 1500,
+    "img" :"/Assets/jean.jpg"
+  },{
+    "id" : 4,
+    "name" : "Laptop",
+    "description" : "Portabale Dell Laptop",
+    "price" : 20000,
+    "img": "/Assets/laptop.jpeg"
+  },{
+    "id" : 5,
+    "name" : "Shirt",
+    "description" : "A black Shirt",
+    "price" : 1000,
+    "img" : "/Assets/shirt.png"
   }
 ]

@@ -1,24 +1,13 @@
-import express from "express"
-import fs from "fs"
-
+import express from "express";
+import Database from '../Database.js';
 const router = express.Router();
 router.use(express.json());
 
 
 
-function AddProductToData(NAME,deetail,price,image){
-    const Data = JSON.parse(fs.readFileSync("/home/shahzaib/Downloads/Project/Data/Data2.json", "utf-8"));
-
-    Data.push({
-        id:Data.length + 1,
-        name : NAME,
-        description : deetail,
-        price : price,
-        img : image
-    })
-    fs.writeFileSync("/home/shahzaib/Downloads/Project/Data/Data2.json", JSON.stringify(Data, null, 2));
-
-
+function AddProductToData(name,detail,price,image){
+    const result = Database.query(`INSERT INTO Products (ProductName, Price, DESCRIPTION, IMAGE_URL) VALUES 
+                         (${name},${price} ,${detail}, ${image})`)
 }
 router.post("/", (req, res) => {
     const {name , description,price, image} = req.body;

@@ -13,6 +13,7 @@ import Addproduct from "./Routes/AddProduct.mjs"
 import SearchRoute from "./Routes/Search.mjs"
 import RemoveProduct from "./Routes/RemoveProduct.mjs"
 import FilterRoute from "./Routes/Filter.mjs"
+import Databse from "./Database.js"
 
 const app = express();
 app.use(session({
@@ -37,6 +38,7 @@ app.use("/Addproduct",Addproduct);
 app.use("/Search",SearchRoute);
 app.use("/RemoveProduct",RemoveProduct)
 app.use("/filter",FilterRoute)
+
 
 
 
