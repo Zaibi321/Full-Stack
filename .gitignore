@@ -1,6 +1,6 @@
 Backend/node_modules
 /Backend/.env
 *.log
-Local PostgreSQL.session.sql
 Backend/Database.js
 node_modules
+post.sql
